@@ -4,6 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Authors>hasael</Authors>
     <Company>hasael</Company>
+    <Description>Lightweight library with basic types of functional-programming style</Description>
+    <PackageProjectUrl>https://github.com/hasael/FunBase</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/hasael/FunBase</RepositoryUrl>
+    <PackageTags>functional</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
