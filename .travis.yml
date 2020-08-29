@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+dotnet: 3.1
+solution: FunBase.sln
+script:
+  - dotnet build src/
+  - dotnet test src/
+  - dotnet pack src/ --configuration Release -p:Version=1.0.$TRAVIS_BUILD_NUMBER
+  - dotnet nuget push "src/FunBase/bin/Release/FunBase.1.0.$TRAVIS_BUILD_NUMBER.nupkg" --source https://api.nuget.org/v3/index.json --api-key $NUGET_KEY
