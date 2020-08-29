@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FunBase.ClassInstances
+namespace FunBase.Types
 {
     public class Either<TL, TR>
     {

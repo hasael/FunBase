@@ -1,5 +1,5 @@
 ﻿using System;
-using FunBase.ClassInstances;
+using FunBase.Types;
 using Xunit;
 
 namespace FunBase.Tests
