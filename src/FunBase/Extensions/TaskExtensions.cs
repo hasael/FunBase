@@ -38,5 +38,15 @@ namespace FunBase.Extensions
             }, TaskContinuationOptions.ExecuteSynchronously);
             return taskCompletitionSource.Task;
         }
+
+        public static async Task<B> FlatMap<A,B>(this Task<A> self, Func<A,Task<B>> func)
+        {
+            return await func(await self);
+        }
+        public static async Task<B> Map<A, B>(this Task<A> self, Func<A, B> func)
+        {
+            return func(await self);
+        }
+
     }
 }
