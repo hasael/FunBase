@@ -99,7 +99,7 @@ namespace FunBase.ClassInstances
         public Try<A> Recover(Func<Exception, A> func)
         {
             if (IsFailure)
-                return Return(func(Error));
+                return Pure(func(Error));
             else
                 return this;
         }
@@ -108,11 +108,12 @@ namespace FunBase.ClassInstances
             => IsSuccess ? success(Value) : fail(Error);
 
 
-        internal static Try<T> Return<T>(T x)
+        internal static Try<T> Pure<T>(T x)
         {
             return Try<T>.From(() => x);
         }
-        public static Try<A> Return(A x)
+
+        private static Try<A> Pure(A x)
         {
             return Try<A>.From(() => x);
         }
@@ -128,7 +129,7 @@ namespace FunBase.ClassInstances
         [Pure]
         public Try<B> Map<B>(Func<A, B> f)
         {
-            return FlatMap((A a) => Return(f(a)));
+            return FlatMap((A a) => Pure(f(a)));
         }
         [Pure]
         public Try FlatMap(Func<A,Try> f)

@@ -132,7 +132,7 @@ namespace FunBase.Tests
             var tryApp = Try<String>.From(() => startValue);
             Func<String, int> func = s => value;
 
-            var actual = tryApp.Apply(Try<Func<string, int>>.Return(func));
+            var actual = tryApp.Apply(Try<Func<string, int>>.From(() => func));
             var expected = Try<int>.From(() => value);
 
             Assert.Equal(expected, actual);

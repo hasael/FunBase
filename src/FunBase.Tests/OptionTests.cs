@@ -125,7 +125,7 @@ namespace FunBase.Tests
             var option = Option<String>.From(startValue);
             Func<String, int> func = s => value;
 
-            var actual = option.Apply(Option<Func<string, int>>.Return(func));
+            var actual = option.Apply(Option<Func<string, int>>.From(func));
             var expected = Option<int>.From(value);
 
             Assert.Equal(expected, actual);

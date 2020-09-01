@@ -93,13 +93,9 @@ namespace FunBase.ClassInstances
         public T Match<T>(Func<A, T> success, Func<T> none)
           => IsDefined ? success(Value) : none();
 
-        private static Option<T> Return<T>(T x)
+        private static Option<T> Pure<T>(T x)
         {
             return Option<T>.From(x);
-        }
-        public static Option<A> Return(A x)
-        {
-            return From(x);
         }
 
         [Pure]
@@ -113,7 +109,7 @@ namespace FunBase.ClassInstances
         [Pure]
         public Option<B> Map<B>(Func<A, B> f)
         {
-            return FlatMap((A a) => Return(f(a)));
+            return FlatMap((A a) => Pure(f(a)));
         }
 
         [Pure]

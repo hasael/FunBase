@@ -94,7 +94,7 @@ namespace FunBase.ClassInstances
         [Pure]
         public Try<B> Map<B>(Func<B> f)
         {
-            return FlatMap(() => Try<B>.Return(f()));
+            return FlatMap(() => Try<B>.Pure(f()));
         }
 
         [Pure]
