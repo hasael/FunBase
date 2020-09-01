@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FunBase.Types;
+using System;
 using System.Diagnostics.Contracts;
 
 namespace FunBase.ClassInstances
@@ -102,16 +103,11 @@ namespace FunBase.ClassInstances
             else
                 return this;
         }
+
         public T Match<T>(Func<A, T> success, Func<Exception, T> fail)
             => IsSuccess ? success(Value) : fail(Error);
 
-        public Option<A> ToOption()
-        {
-            if (IsSuccess)
-                return Option<A>.From(Value);
-            else
-                return Option<A>.None();
-        } 
+
         internal static Try<T> Return<T>(T x)
         {
             return Try<T>.From(() => x);
@@ -151,6 +147,22 @@ namespace FunBase.ClassInstances
         public Try<B> Apply<B>(Try<Func<A, B>> fa)
         {
             return FlatMap((A a) => fa.Map<B>((Func<A, B> f) => f.Invoke(a)));
+        }
+
+        public Either<Exception,A> ToEither()
+        {
+            if (IsSuccess)
+                return Either<Exception, A>.From(Value);
+            else
+                return Either<Exception, A>.From(new ArgumentNullException("Unexpected empty value"));
+        }
+
+        public Either<Exception, A> ToEither(String message)
+        {
+            if (IsSuccess)
+                return Either<Exception, A>.From(Value);
+            else
+                return Either<Exception, A>.From(new ArgumentNullException(message));
         }
 
         public static implicit operator Try<A>(A right) => new Try<A>(right);
